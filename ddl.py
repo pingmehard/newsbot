@@ -120,7 +120,7 @@ def add_sources(user_id, source):
     with open(f'./data/users/{user_id}/sources.json', 'w') as f:
         json.dump(file, f)
 
-def negative_counter(user_id):
+def negative_counter(user_id): # will be deprecated
 
     if 'negative_counter.json' in os.listdir(f'./data/users/{user_id}/'):
         with open(f'./data/users/{user_id}/negative_counter.json', 'r') as f:

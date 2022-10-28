@@ -9,7 +9,7 @@
 # может быть можно справшивать ключевые слова? или отмечать какие подходят
 # есть более крупная бибилиотека по новостям https://spacy.io/models/ru от natasha
 
-from ddl import read_all_users, add_to_schedule, create_sources, read_sources, remove_sources, add_sources, negative_counter
+from ddl import read_all_users, add_to_schedule, create_sources, read_sources, remove_sources, add_sources
 from reader_saver import save_user_data, load_last_news, save_last_ten_declined_news, load_last_ten_declined_news
 from prep_embeddings import get_message_rule, create_user_embeddings, find_intersections
 

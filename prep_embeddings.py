@@ -145,9 +145,6 @@ def get_message_rule(news_title, user_id):
 
 def find_intersections(news_title, user_id, news_title_emb):
 
-    def sort_keys(x):
-        return x[1]
-
     with open(f'./data/users/{user_id}/embeddings_{user_id}.json', 'r') as f:
         data = json.load(f)
 
@@ -164,7 +161,7 @@ def find_intersections(news_title, user_id, news_title_emb):
         for news in data:
             data_temp[news] = data[news]
 
-    top_10_titles = [data_temp[i[0]]['news_title'] for i in sorted(news_cos_distances, key = sort_keys)[::-1][:10]]
+    top_10_titles = [data_temp[i[0]]['news_title'] for i in sorted(news_cos_distances, key = lambda x: x[1])[::-1][:10]]
 
     array_temp = []
     dict_temp = {}
