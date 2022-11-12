@@ -1,6 +1,8 @@
 import os, json
 import numpy as np
 
+from model import predict
+
 from razdel import tokenize
 from ddl import cos_distance
 from navec import Navec
@@ -125,20 +127,14 @@ def get_message_rule(news_title, user_id):
 
     if f'{user_id}' in os.listdir(os.getcwd() + f'\\data\\users\\'):
 
-        with open(f'./data/users/{user_id}/embeddings_{user_id}.json', 'r') as f:
-            data = json.load(f)
-
         news_title_emb = to_navec(news_title)
 
-        for id in data:
-            data[id]['cos_distance'] = cos_distance(np.array(data[id]['news_embedding']), news_title_emb)
+        answer = predict(user_id, news_title_emb.reshape((1,-1)))[0][0]
 
-        news_cos_distances = [data[id]['cos_distance'] for id in data if data[id]['target'] == '0']
-
-        for i in news_cos_distances:
-            if i > 0.65:
-                return 0, None
-        return 1, news_title_emb
+        if answer >= 0.5:
+            return 1, news_title_emb
+        else:
+            return 0, None
 
     else:
         return -1, None

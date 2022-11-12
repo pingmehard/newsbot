@@ -135,8 +135,6 @@ def query_handler(call):
     elif '_0_' in call.data:
         bot.answer_callback_query(callback_query_id=call.id, text="Ок, будет меньше таких новостей", cache_time = 3)
         bot.delete_message(chat_id = call.message.chat.id, message_id = call.message.message_id)
-        # Считаем количество отрицательных уточнений для поиска правильной границы по отсечению новостей
-        negative_counter(call.message.chat.id)
 
     create_user_embeddings(call_data[0])
 
@@ -171,15 +169,7 @@ def send_last_news():
 
                         if gmr == 1:
 
-                            call, _ = find_intersections(news_title = news_title, user_id = user, news_title_emb = news_title_emb)
-
-                            if call == 1:
-                                # Отправляем рекомендуемую новость
-                                bot.send_message(user, news_title + '\n' + news_link, reply_markup = markup_inline)
-
-                            else:
-                                # Сохраняем нерекомендуемую новость
-                                save_last_ten_declined_news(news_title = news_title, news_link = news_link, user_id = user)
+                            bot.send_message(user, news_title + '\n' + news_link, reply_markup = markup_inline)
 
                         elif gmr == -1:
                             # Отправляем все новости, если юзер новый
