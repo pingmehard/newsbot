@@ -10,7 +10,10 @@ import pandas as pd
 from tensorflow import keras
 from tensorflow.keras import layers
 
-def train_model(user_id, sources):
+def train_model(user_id):
+
+    with open(f'./sources.json', 'r', encoding = 'utf-8') as f:
+        sources = json.load(f)['list']
 
     data_vectors = {}
     matching_cos_distance = []
@@ -57,7 +60,7 @@ def train_model(user_id, sources):
 
     # Ищем позитивные для человека новости, потенциально это все новости, что меньше (среднее по всем сравнениям + 1 стандартное отклонение)
     for item in zip(potential_positive_samples, matching_cos_distance):
-        if item[1] >= (matching_mean + 2 * matching_std):
+        if item[1] >= (matching_mean + 1 * matching_std):
             negative_list_std.append(item[0])
 
     # Вычитаем из позитивных потенциальных негативные относительно стандартного отклонения

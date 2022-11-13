@@ -550,4 +550,14 @@
 'NoneType' object has no attribute 'text'2022-11-13 16:25:50.898297 --------- 
 'NoneType' object has no attribute 'text'2022-11-13 16:27:52.439575 --------- 
 'NoneType' object has no attribute 'text'2022-11-13 16:30:42.664398 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:32:52.311781 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:34:56.543554 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:36:57.938567 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:39:09.042277 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:41:21.037935 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:43:32.928123 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:45:44.880263 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:48:50.146316 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:51:38.589001 --------- 
+'NoneType' object has no attribute 'text'2022-11-13 16:56:11.314068 --------- 
 'NoneType' object has no attribute 'text'

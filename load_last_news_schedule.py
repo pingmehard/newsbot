@@ -1,10 +1,13 @@
 import schedule
 import time
 import json
+import threading
 
 from reader_saver import save_last_news
 from load_last_news import get_last_news_rbc, get_last_news_lenta, get_last_news_ria, get_last_news_habr
 from prep_embeddings import save_embeddings
+from model import train_model
+from ddl import read_all_users
 
 with open(f'./sources.json', 'w', encoding = 'utf-8') as f:
 
@@ -14,8 +17,12 @@ with open(f'./sources.json', 'w', encoding = 'utf-8') as f:
     
     json.dump(data, f)
 
-def save_data_schedule():
+def run_threaded(job_func):
+    job_thread = threading.Thread(target=job_func)
+    job_thread.start()
 
+def save_data_schedule():
+    print("I'm running on thread %s" % threading.current_thread())
     try:
         save_last_news(get_last_news_rbc())
         save_embeddings(['rbc'])
@@ -37,7 +44,16 @@ def save_data_schedule():
     except:
         pass
 
-schedule.every(1).minutes.do(save_data_schedule)
+def train_models():
+    print("I'm running on thread %s" % threading.current_thread())
+    users = read_all_users()
+    for user in users:
+        train_model(user)
+    print('Модели успешно обучились')
+
+
+schedule.every(1).minutes.do(run_threaded, save_data_schedule)
+schedule.every(12).hours.do(run_threaded, train_models)
 
 while True:
     schedule.run_pending()
