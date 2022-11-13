@@ -25,6 +25,8 @@ from natasha import (
     Doc
 )
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 segmenter = Segmenter()
 morph_vocab = MorphVocab()
 emb = NewsEmbedding()

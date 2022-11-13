@@ -124,7 +124,7 @@ def train_model(user_id, sources):
         ]
     )
 
-    model.compile(loss="binary_crossentropy", optimizer = keras.optimizers.Adam(learning_rate=0.0001), metrics=[tf.keras.metrics.BinaryAccuracy()])
+    model.compile(loss="binary_crossentropy", optimizer = keras.optimizers.Adam(learning_rate=0.0001), metrics=[keras.metrics.BinaryAccuracy()])
 
     model.fit(X_train, y_train, epochs=50, batch_size = 32, validation_data=(X_test, y_test))
 
