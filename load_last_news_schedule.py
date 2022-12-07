@@ -51,10 +51,10 @@ def train_models():
         train_model(user)
     print('Модели успешно обучились')
 
+def start_schedule():
+    schedule.every(1).minutes.do(run_threaded, save_data_schedule)
+    schedule.every(12).hours.do(run_threaded, train_models)
 
-schedule.every(1).minutes.do(run_threaded, save_data_schedule)
-schedule.every(12).hours.do(run_threaded, train_models)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)

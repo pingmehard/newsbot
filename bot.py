@@ -23,6 +23,8 @@ import shutil
 
 from threading import Thread
 
+from load_last_news_schedule import start_schedule
+
 bot = telebot.TeleBot(token)
 
 # Загружаем список источников для обновления 
@@ -47,8 +49,6 @@ def keyboard(user_id):
     keyboard.add(types.KeyboardButton('Скрыть'))
 
     return keyboard
-
-Thread(target=bot.infinity_polling, args=(25,25)).start()
 
 @bot.message_handler(commands=["show_declined"])
 def show_declined(message):
@@ -178,12 +178,21 @@ def send_last_news():
                             # Сохраняем нерекомендуемую новость
                             save_last_ten_declined_news(news_title = news_title, news_link = news_link, user_id = user)
 
-while True:
+def start_sending():
+    while True:
 
-    try:
-        send_last_news()
-    except Exception as e:
-        print('Ошибка, проверить: ',e)
-        time.sleep(60)
+        try:
+            send_last_news()
+        except Exception as e:
+            print('Ошибка, проверить: ',e)
+            time.sleep(60)
 
-    time.sleep(10)
+        time.sleep(10)
+
+thread1 = Thread(target=bot.infinity_polling)
+thread2 = Thread(target=start_sending)
+thread3 = Thread(target=start_schedule)
+
+thread1.start()
+thread2.start()
+thread3.start()
