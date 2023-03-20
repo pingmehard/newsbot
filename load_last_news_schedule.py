@@ -1,3 +1,6 @@
+# Переписать расписание на отдельный thread или закрывать threads 
+# чтобы они не забивали память
+
 import schedule
 import time
 import json

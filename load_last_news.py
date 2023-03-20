@@ -1,3 +1,9 @@
+### Убираем обширные логи
+import logging
+from selenium.webdriver.remote.remote_connection import LOGGER
+LOGGER.setLevel(logging.WARNING)
+### Убираем обширные логи
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import hashlib
@@ -8,6 +14,7 @@ def get_last_news_rbc():
 
     options = Options()
     options.add_argument("--headless")
+    options.add_argument("--log-level=3")
     driver = webdriver.Chrome(".\chromedriver\chromedriver.exe", options=options)
 
     rbc = 'https://www.rbc.ru/short_news/'
@@ -58,6 +65,7 @@ def get_last_news_lenta():
     
     options = Options()
     options.add_argument("--headless")
+    options.add_argument("--log-level=3")
     driver = webdriver.Chrome(".\chromedriver\chromedriver.exe", options=options)
 
     lenta = 'https://lenta.ru/parts/news/'
@@ -104,6 +112,7 @@ def get_last_news_lenta():
 def get_last_news_ria():
     options = Options()
     options.add_argument("--headless")
+    options.add_argument("--log-level=3")
     driver = webdriver.Chrome(executable_path = r".\chromedriver\chromedriver.exe", options=options)
 
     site_link = 'https://ria.ru'
@@ -147,6 +156,7 @@ def get_last_news_habr():
 
     options = Options()
     options.add_argument("--headless")
+    options.add_argument("--log-level=3")
     driver = webdriver.Chrome(executable_path = r".\chromedriver\chromedriver.exe", options=options)
 
     site_link = 'https://habr.com'
